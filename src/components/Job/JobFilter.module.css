@@ -1,0 +1,19 @@
+.filters {
+    left: 50%;
+    position: absolute;
+    top: 110px;
+    transform: translateX(-50%);
+    width: 1110px;
+}
+
+@media screen and (max-width: 375px) {
+    .filters {
+        left: initial;
+        margin: 0 auto;
+        margin-top: -120px;
+        position: relative;
+        top: initial;
+        transform: none;
+        width: calc(100% - 40px);
+    }
+}

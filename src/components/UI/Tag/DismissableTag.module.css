@@ -1,0 +1,33 @@
+.dismissable {
+    margin: 15px 0 15px 15px;
+}
+
+.language {
+    padding-left: 10px;
+}
+
+.dismiss-button {
+    background: #5da3a3;
+    border: none;
+    border-radius: 0 3px 3px 0px;
+    color: var(--light-gray-cyan);
+    height: 30px;
+    margin-left: 10px;
+    width: 30px;
+}
+
+.dismiss-button > img {
+    vertical-align: middle;
+}
+
+.dismiss-button:hover {
+    background: var(--darker-gray-cyan);
+    cursor: pointer;
+}
+
+@media screen and (max-width: 375px) {
+    .dismissable,
+    .dismissable:first-child {
+        margin: 0;
+    }
+}

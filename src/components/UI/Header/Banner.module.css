@@ -1,0 +1,20 @@
+.banner {
+    background: url('../../../assets/images/bg-header-desktop.svg') no-repeat center;
+    background-color: var(--dark-cyan);
+    background-size: cover;
+    margin-bottom: 75px;
+    height: 156px;
+    width: 100%;
+}
+
+.banner-image {
+    height: 100%;
+    width: 100%;
+}
+
+@media screen and (max-width: 375px) {
+    .banner {
+        background: url('../../../assets/images/bg-header-mobile.svg') no-repeat center;
+        background-color: var(--dark-cyan);
+    }
+}
