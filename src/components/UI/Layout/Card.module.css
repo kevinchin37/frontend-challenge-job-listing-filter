@@ -1,0 +1,19 @@
+.card {
+    background: white;
+    border-radius: 5px;
+    margin: 20px 0;
+    max-height: 154px;
+    width: 100%;
+}
+
+.card:hover .highlight {
+    color: var(--dark-cyan);
+}
+
+@media screen and (max-width: 375px) {
+    .card {
+        height: 100%;
+        margin-bottom: 40px;
+        max-height: none;
+    }
+}

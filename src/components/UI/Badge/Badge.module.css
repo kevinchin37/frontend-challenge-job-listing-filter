@@ -1,0 +1,17 @@
+.badge {
+    border-radius: 15px;
+    color: var(--light-gray-cyan-tablet);
+    font-size: 11px;
+    font-weight: 600;
+    margin: 4px;
+    padding: 4px 8px;
+    text-transform: uppercase;
+}
+
+.new {
+    background: var(--dark-cyan);
+}
+
+.featured {
+    background: var(--darker-gray-cyan);
+}
