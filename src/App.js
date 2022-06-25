@@ -1,7 +1,12 @@
+import JobList from './components/Job/JobList';
+import Banner from './components/UI/Header/Banner';
+
 function App() {
   return (
-    <div>
-    </div>
+    <section>
+      <Banner />
+      <JobList />
+    </section>
   );
 }
 
