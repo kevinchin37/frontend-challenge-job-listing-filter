@@ -1,0 +1,26 @@
+.spinner-wrapper {
+    position: fixed;
+    left: 50vw;
+    top: 50vh;
+}
+
+.spinner {
+    height: 25px;
+    width: 25px;
+    border: 10px solid var(--dark-gray-cyan);
+    border-radius: 50%;
+    border-top: 10px solid var(--dark-cyan);
+    animation-name: spin;
+    animation-duration: 1.2s;
+    animation-iteration-count: infinite;
+    margin: 0 auto;
+}
+
+.spinner:before {
+    content: "";
+}
+
+@keyframes spin {
+    from { rotate: 0; }
+    to { rotate: 360deg; }
+}
