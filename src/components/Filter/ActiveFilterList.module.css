@@ -39,10 +39,13 @@
         width: calc(100% - 40px);
     }
 
+    .filters {
+        row-gap: 20px;
+    }
+
     .languages {
-        border-top: 1px solid #bdc1c0;
-        margin-top: 20px;
-        padding-top: 20px;
+        margin-bottom: 60px;
+        padding: 20px 0;
         width: calc(100% - 40px);
     }
 }
