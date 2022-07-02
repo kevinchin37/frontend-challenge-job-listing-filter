@@ -21,7 +21,7 @@
     cursor: pointer;
 }
 
-.languages {
+.filter-grid {
     align-items: center;
     display: grid;
     grid-template-columns: 1fr 0fr;
@@ -43,7 +43,7 @@
         row-gap: 20px;
     }
 
-    .languages {
+    .filter-grid {
         margin-bottom: 60px;
         padding: 20px 0;
         width: calc(100% - 40px);

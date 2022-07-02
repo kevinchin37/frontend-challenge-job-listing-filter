@@ -10,7 +10,7 @@ const ActiveFilterList = () => {
 
     return (
         <Card className={classes['filter-container']}>
-            <main className={classes.languages}>
+            <main className={classes['filter-grid']}>
                 <div className={classes.filters}>
                     {filterContext.filters.map((language) => (
                         <FilterItem
