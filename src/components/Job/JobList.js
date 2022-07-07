@@ -1,63 +1,57 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import DUMMY_DATA from '../data.json';
 import JobListItem from "./JobListItem";
-import JobFilter from "./JobFilter";
+import FilterContext from "../../store/filter-context";
+import ActiveFilterList from "../Filter/ActiveFilterList";
+import Spinner from "../UI/Layout/Spinner";
 
 const JobList = () => {
-    const [filterLanguages, setfilterLanguages] = useState([]);
+    const filterContext = useContext(FilterContext);
+    const [jobs, setJobs] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
-    let jobPostings = [];
-    let filterHasItems = false;
+    let hasActiveFilters = filterContext.filters.length > 0 ? true : false;
 
-    if (filterLanguages.length > 0) {
-        filterHasItems = true;
-    }
+    useEffect(() => {
+        let filterSetTimer;
 
-    if (filterLanguages.length !== 0) {
-        jobPostings = DUMMY_DATA.filter(job => {
-            return filterLanguages.every(filterLanguage => {
-                return job.languages.includes(filterLanguage);
-            });
-        })
-    } else {
-        jobPostings = DUMMY_DATA;
-    }
+        if (hasActiveFilters) {
+            setIsLoading(true);
 
-    const onFilterChangeHandler = (filterLanguage) => {
-        setfilterLanguages((prevfilterLanguages) => {
-            let updatedFilters = prevfilterLanguages;
+            /*
+                Job list shouldn't re-render immediately on the event of a filter being clicked.
+                This would especially be helpful if data was being fetched instead as it would help lessen api calls.
+                Added a debounce of 1.5 secs to give more time to apply filters.
+            */
+            filterSetTimer = setTimeout(() => {
+                const filteredJobs = DUMMY_DATA.filter(job => {
+                    return filterContext.filters.every(filter => {
+                        return job.languages.includes(filter);
+                    });
+                });
 
-            const existingFilterIndex = filterLanguages.findIndex(language => language == filterLanguage);
-            if (existingFilterIndex < 0) {
-                updatedFilters = [...prevfilterLanguages, filterLanguage];
-            }
+                setJobs(filteredJobs);
+                setIsLoading(false);
+            }, 1500);
 
-            return updatedFilters;
-        });
-    }
+        } else {
+            setJobs(DUMMY_DATA);
+            setIsLoading(false);
+        }
 
-    const onRemoveFilterHandler = (filterLanguage) => {
-        setfilterLanguages((prevfilterLanguages) => {
-            const existingFilterIndex = prevfilterLanguages.findIndex(language => language == filterLanguage);
-            const updatedfilter = prevfilterLanguages.filter((language, index) => index != existingFilterIndex);
-
-            return updatedfilter;
-        });
-    }
-
-    const onResetFilterHandler = () => {
-        setfilterLanguages([]);
-    }
+        return () => {
+            clearTimeout(filterSetTimer);
+        }
+    }, [filterContext.filters]);
 
     return (
         <React.Fragment>
-            {filterHasItems && <JobFilter languages={filterLanguages}
-                removeFilter={onRemoveFilterHandler}
-                resetFilter={onResetFilterHandler}
-            />}
+            {hasActiveFilters && <ActiveFilterList />}
 
-            {jobPostings.map(job => (
-                <JobListItem key={job.id} item={job} addToFilter={onFilterChangeHandler}/>
+            {isLoading && <Spinner>Applying Filters</Spinner>}
+
+            {jobs.map(job => (
+                <JobListItem key={job.id} item={job} />
             ))}
         </React.Fragment>
     )
